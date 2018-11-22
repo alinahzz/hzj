@@ -42,6 +42,7 @@ var UdpActionsMapping map[int]Udpactionhandler
 var HttpActionsMapping map[int]Httpactionhandler
 
 const ConnCloseAction = 444
+const ConnHeartAction = 1000
 
 func init() {
 	ActionsMapping = make(map[int]Actionhandler)

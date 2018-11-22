@@ -7,7 +7,6 @@ import (
 	"hzj/comm/wsi"
 	"log"
 	"net/http"
-	"time"
 )
 
 var (
@@ -37,15 +36,11 @@ func WsCenter(c *gin.Context) {
 
 	// 启动心跳
 	go func() {
-		var (err error)
-		for {
-			hh := new(wsi.Rsp)
-			hh.Action = 1000
-			if err = conn.WriteMessage(hh);err != nil{
-				return
-			}
-			time.Sleep(30*time.Second)
+
+		if hd, ex := ActionsMapping[ConnHeartAction]; ex {
+			hd.Run("", conn)
 		}
+
 	}()
 
 	for {
