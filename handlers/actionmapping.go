@@ -32,6 +32,9 @@ func (f Httpactionhandlerimp) Run(data string) (int, interface{}) {
 	return f(data)
 }
 
+/** 系统使用不对外 */
+var SystemActionMapping map[int]Actionhandler
+
 /** 消息协议与处理映射 */
 var ActionsMapping map[int]Actionhandler
 
@@ -45,6 +48,7 @@ const ConnCloseAction = 444
 const ConnHeartAction = 1000
 
 func init() {
+	SystemActionMapping = make(map[int]Actionhandler)
 	ActionsMapping = make(map[int]Actionhandler)
 	UdpActionsMapping = make(map[int]Udpactionhandler)
 	HttpActionsMapping = make(map[int]Httpactionhandler)

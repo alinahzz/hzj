@@ -37,7 +37,7 @@ func WsCenter(c *gin.Context) {
 	// 启动心跳
 	go func() {
 
-		if hd, ex := ActionsMapping[ConnHeartAction]; ex {
+		if hd, ex := SystemActionMapping[ConnHeartAction]; ex {
 			hd.Run("", conn)
 		}
 
@@ -66,7 +66,7 @@ func WsCenter(c *gin.Context) {
 	}
 ERR:
 	conn.Close()
-	if hd, ex := ActionsMapping[ConnCloseAction]; ex {
+	if hd, ex := SystemActionMapping[ConnCloseAction]; ex {
 		hd.Run(conn.Uid, nil)
 	}
 }
