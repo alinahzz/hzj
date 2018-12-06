@@ -3,14 +3,16 @@ package handlers
 import (
 	"encoding/json"
 	"github.com/gin-gonic/gin"
-	"log"
 	"net/http"
 )
 
 func HttpCenter(c *gin.Context) {
-	value, exist := c.GetQuery("data")
-	if !exist {
-		log.Println("data >> is nil")
+
+	var value string
+	if c.Request.Method == "POST" {
+		value = c.PostForm("data")
+	} else {
+		value, _= c.GetQuery("data")
 	}
 
 	pd := struct {
